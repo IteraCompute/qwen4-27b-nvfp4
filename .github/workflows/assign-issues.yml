@@ -1,0 +1,37 @@
+name: Assign new issues
+
+on:
+  issues:
+    types: [opened, reopened]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Existing issue to assign
+        required: true
+        type: number
+
+permissions:
+  issues: write
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        env:
+          ISSUE_NUMBER: ${{ inputs.issue_number || github.event.issue.number }}
+        with:
+          script: |
+            const issue_number = Number(process.env.ISSUE_NUMBER);
+            if (!Number.isInteger(issue_number) || issue_number <= 0) {
+              throw new Error('A positive issue number is required');
+            }
+            const { data: issue } = await github.rest.issues.get({
+              ...context.repo, issue_number
+            });
+            if (issue.assignees.length === 0) {
+              await github.rest.issues.addAssignees({
+                ...context.repo, issue_number, assignees: ['K-3-LT']
+              });
+            }
