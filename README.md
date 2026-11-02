@@ -9,6 +9,12 @@ An independent community project by [IteraCompute](https://iteracompute.com) pre
 
 **中文：** 本仓库提前准备 Qwen4-27B 的 NVFP4 量化与发布流程。当前只有工具和文档，没有模型权重或已验证的性能结果。模型正式发布后，先确认架构与许可证，再进行校准、Blackwell 推理验证和质量评测。本项目独立维护，不代表 Qwen 官方。当前不启用定时模型检测。
 
+## Download the currently deployed model
+
+Looking for IteraCompute's deployed NVFP4 checkpoint? Download [**IteraCompute/Qwen3.8-27B-NVFP4**](https://huggingface.co/IteraCompute/Qwen3.8-27B-NVFP4), with published weights, deployment documentation and SHA-256 checksums.
+
+中文：当前实机部署、可下载的权重是 **Qwen3.8-27B NVFP4**，见上方 Hugging Face 链接。本仓库继续用于 Qwen4 的量化发布准备，不把 Qwen3.8 权重标记为 Qwen4。
+
 ## What is ready
 
 - A small wrapper around NVIDIA's official Model Optimizer PTQ example, with a pinned upstream commit, explicit source revision, dry-run mode, and run provenance.
